@@ -9,14 +9,10 @@ repositories {
 }
 
 dependencies {
-    // compile 'org.apache.commons:commons-csv:1.6','org.apache.commons:commons-validator:1.4.1'
-    //  compile group: 'commons-validator', 'org.apache.commons',name: 'commons-validator','commons-csv',
-    //  version: '1.4.1','1.7'
-    //  compile group: 'commons-validator', name: 'commons-validator', version: '1.4.1'
     compile group: 'commons-validator', name: 'commons-validator', version: '1.4.1'
     compile group: 'org.apache.commons', name: 'commons-csv', version: '1.7'
 }
 
 task application {
-    mainClassName = 'Demo'
+    mainClassName = 'CSVDemo'
 }

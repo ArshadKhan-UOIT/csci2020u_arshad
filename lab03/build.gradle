@@ -37,5 +37,5 @@ jar {
 task (minify, dependsOn: 'jar', type: proguard.gradle.ProGuardTask) {
   configuration 'proguard.cfg'
   injars 'build/libs/lab03-1.0.jar'
-  outjars 'build/libs/lab03.min.jar'
+  outjars 'build/libs/lab03-1.0.min.jar'
 }

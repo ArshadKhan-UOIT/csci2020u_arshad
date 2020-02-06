@@ -103,13 +103,21 @@ public class lab04 extends Application {
         gridpane.add(dp, 1, 5);
 
         gridpane.add(b1, 1, 6);
-        b1.setOnAction(e->
-                System.out.println("Username: " + t1.getText() +
-                                    "\nPassword: " + passwordField.getText() +
-                                    "\nFull Name: " + t3.getText() +
-                                    "\nE-Mail: " + t4.getText() +
-                                    "\nPhone #: " + t5.getText() +
-                                    "\nDate of Birth: " + dp.getValue()));
+        b1.setOnAction(e-> {
+            System.out.println("Username: " + t1.getText() +
+                            "\nPassword: " + passwordField.getText() +
+                            "\nFull Name: " + t3.getText() +
+                            "\nE-Mail: " + t4.getText() +
+                            "\nPhone #: " + t5.getText() +
+                            "\nDate of Birth: " + dp.getValue());
+            t1.clear();
+            passwordField.clear();
+            t3.clear();
+            t4.clear();
+            t5.clear();
+            dp.setValue(null);
+        });
+
 
         //creating an object scene
         Scene scene = new Scene(gridpane);

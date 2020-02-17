@@ -1,3 +1,4 @@
+//Arshad Khan 100695721
 public class StudentRecord {
     private String SID;
     private float Asmt;

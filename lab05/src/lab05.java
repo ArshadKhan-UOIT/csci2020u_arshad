@@ -1,5 +1,10 @@
+//Arshad Khan 100695721
 import javafx.application.Application;
+import javafx.geometry.Pos;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Side;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -8,15 +13,19 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.*;
+import javafx.scene.text.Text;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import java.util.*;
 
 
 public class lab05 extends Application {
     TableView<StudentRecord> table;
     TextField SIDInput, AsmtInput, MidInput, ExamInput;
+    Button addButton, deleteButton;
     public void start(Stage primaryStage) throws Exception {
 
         primaryStage.setTitle("Lab 05 Solutions");
@@ -72,22 +81,62 @@ public class lab05 extends Application {
         ExamInput.setMinWidth(100);
 
         //Button
-        Button addButton = new Button("Add");
+        addButton = new Button("Add");
         addButton.setOnAction(e -> addButtonClicked());
-        Button deleteButton = new Button("Delete");
+        deleteButton = new Button("Delete");
         deleteButton.setOnAction(e -> deleteButtonClicked());
 
-        HBox hBox =  new HBox();
-        hBox.setPadding(new Insets(10,10,10,10));
-        hBox.setSpacing(10);
-        hBox.getChildren().addAll(SIDInput, AsmtInput, MidInput, ExamInput, addButton, deleteButton);
+//        HBox hBox =  new HBox();
+//        hBox.setPadding(new Insets(10,10,10,10));
+//        hBox.setSpacing(10);
+//        hBox.getChildren().addAll(SIDInput, AsmtInput, MidInput, ExamInput, addButton, deleteButton);
+//        Text Note = new Text("Select a row then press 'Delete' to delete that row");
+
+        //grid pane
+        GridPane gridpane = new GridPane();
+
+        //size for plane
+        gridpane.setMinSize(400, 220);
+
+        //setting padding
+        gridpane.setPadding(new Insets(10, 10, 10, 10));
+
+        //vertical and horizontal gaps between columns
+        gridpane.setVgap(10);
+        gridpane.setHgap(10);
+
+        //grid alignment
+        gridpane.setAlignment(Pos.TOP_LEFT);
+        //arranging everything in grid
+
+        //SID input
+        gridpane.add(SIDInput, 0, 0);
+
+        //Assignment input
+        gridpane.add(AsmtInput, 1, 0);
+
+        //Mid input
+        gridpane.add(MidInput, 0, 1);
+
+        //Exam input
+        gridpane.add(ExamInput, 1, 1);
+
+        //Note
+//        gridpane.add(Note, 2, 1);
+
+        //add button
+        gridpane.add(addButton, 0, 2);
+
+        //delete button
+        gridpane.add(deleteButton, 2, 2);
 
         table = new TableView<>();
         table.setItems(getAllStudents());
         table.getColumns().addAll(SIDCol, AsmtCol, MidCol, ExamCol, FinalCol, GradeCol);
 
         VBox vBox = new VBox();
-        vBox.getChildren().addAll(table, hBox);
+//        vBox.getChildren().addAll(table, hBox);
+        vBox.getChildren().addAll(table, gridpane);
 
         Scene scene = new Scene(vBox);
         primaryStage.setScene(scene);
@@ -116,6 +165,37 @@ public class lab05 extends Application {
         allRecords = table.getItems();
         recordsSelected = table.getSelectionModel().getSelectedItems();
         recordsSelected.forEach(allRecords::remove);
+        boolean checkRecordsSelected = recordsSelected.isEmpty();
+        if (checkRecordsSelected == true) {
+            rowNotSelected();
+        }
+//        System.out.println(recordsSelected);
+    }
+
+    private void rowNotSelected() {
+        Stage stage = new Stage();
+
+        VBox box = new VBox(10);
+        box.setPadding(new Insets(10));
+        stage.setTitle("Error!");
+        // How to center align content in a layout manager in JavaFX
+        box.setAlignment(Pos.CENTER);
+        Label label = new Label("Select a row then press 'Delete' \n\tto delete that row");
+
+        Button conform = new Button();
+        conform.setText("OK");
+
+        conform.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent event) {
+                stage.close(); // return to main window
+            }
+        });
+        box.getChildren().add(label);
+//        box.getChildren().add(Note);
+        box.getChildren().add(conform);
+        Scene scene = new Scene(box, 250, 150);
+        stage.setScene(scene);
+        stage.show();
     }
 
     public ObservableList<StudentRecord> getAllStudents() {

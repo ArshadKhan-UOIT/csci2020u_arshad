@@ -50,6 +50,8 @@ public class StudentRecord {
     public String getGrade() {
         if (getFinal()>=80 && getFinal()<100) {
             grade= "A";
+        } else if (getFinal()==100) {
+            grade= "A";
         } else if (getFinal()>=70 && getFinal()<80) {
             grade = "B";
         } else if (getFinal()>=60 && getFinal()<70) {

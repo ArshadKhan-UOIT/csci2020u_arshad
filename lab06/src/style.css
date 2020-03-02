@@ -1,0 +1,18 @@
+/*Arshad Khan 100695721*/
+.default-color1.chart-bar { -fx-bar-fill: BLUE }
+.default-color0.chart-bar { -fx-bar-fill: RED }
+.data0.chart-pie { -fx-pie-color: aqua; }
+.data1.chart-pie { -fx-pie-color: gold; }
+.data2.chart-pie { -fx-pie-color: darkorange; }
+.data3.chart-pie { -fx-pie-color: darksalmon; }
+.data4.chart-pie { -fx-pie-color: lawngreen; }
+.data5.chart-pie { -fx-pie-color: plum; }
+.chart-pie { /*getting rid of the gaps*/
+   -fx-background-insets: 0;
+   -fx-border-width: 0;
+}
+
+/*
+   Find more details on JavaFX supported named colors at
+   http://docs.oracle.com/javafx/2/api/javafx/scene/doc-files/cssref.html#t...
+*/

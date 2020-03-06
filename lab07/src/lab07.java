@@ -24,14 +24,14 @@ public class lab07 extends Application {
         //Get scanner instance
         String[] warnings = {"FLASH FLOOD","SEVERE THUNDERSTORM","SPECIAL MARINE","TORNADO"};
         File file = new File("/home/arshad/Desktop/csci2020u/lab07/src/weatherwarnings-2015.csv");
-        if (file.exists()) { System.out.println("File Found"); }
+        if (file.exists()) { System.out.println("File Found"); }    //checking if peogram can find the file or not
         else { System.out.println("File not Found"); }
         Scanner scanner = new Scanner(file);
         int ff=0,st=0,sm=0,t=0;
         //Set the delimiter used in file
         scanner.useDelimiter(",");
 
-        while (scanner.hasNext())
+        while (scanner.hasNext())   //counts each of the warnings
         {
             String text = scanner.next();
             if (text.equals(warnings[0])) {
@@ -45,8 +45,8 @@ public class lab07 extends Application {
             }
 
         }
-        text = new Text[]{new Text(), new Text(), new Text(), new Text()};
-        for (int i=0;i<text.length;i++) {
+        text = new Text[]{new Text(), new Text(), new Text(), new Text()};  //initializes the text for the legend array
+        for (int i=0;i<text.length;i++) {   //fills the elements of the text for legend
             text[i].setText(warnings[i]);
         }
 //        System.out.println("ff " + ff);
@@ -55,13 +55,13 @@ public class lab07 extends Application {
 //        System.out.println("t " + t);
         occurrences = new Arc[4];
         results = new int[4];
-        results[0] = ff;
+        results[0] = ff;        //putting the counters into the results
         results[1] = st;
         results[2] = sm;
         results[3] = t;
         lengend = new Rectangle[4];
-        generatePieGraph();
-        generateLeneng();
+        generatePieGraph(); //to generate a pie graph
+        generateLeneng();   //to generate the legend
 
         //Do not forget to close the scanner
         scanner.close();
@@ -72,31 +72,31 @@ public class lab07 extends Application {
 
     }
 
-    private void generateLeneng() {
+    private void generateLeneng() { //this generates the legend
         int y=200, x=100;
         int recWidth = 50;
         int recLength = 25;
         for (int i=0;i<lengend.length;i++) {
-            lengend[i] = rect(x,y,recWidth,recLength,pieColours[i]);
-            text[i].setX(x+58);
+            lengend[i] = rect(x,y,recWidth,recLength,pieColours[i]);    //initializes the rectangle for each legend
+            text[i].setX(x+58); //sets the position for text part of the legend
             text[i].setY(y+18);
-            y+=50;
-            pane.getChildren().addAll(lengend[i], text[i]);
+            y+=50;  //increases the y position so the legend details is not over lapped
+            pane.getChildren().addAll(lengend[i], text[i]); //adds it to the pane
         }
     }
 
     private void generatePieGraph() {
-        int total = 0; for(int i : results) total += i;
+        int total = 0; for(int i : results) total += i; //add the total
         double begin = 0, angle = 0, angleTotal = 0;
         for(int i=0; i<results.length-1; i++) {
-            angle = (results[i] / (double)total) * 360;
-            angleTotal += angle;
-            occurrences[i] = arc(begin,angle,pieColours[i]);
+            angle = (results[i] / (double)total) * 360; //gets percentage of 360 for each but the last
+            angleTotal += angle;    //gets the total angle
+            occurrences[i] = arc(begin,angle,pieColours[i]);    //initializes the arcs for each of the weather warnings
             pane.getChildren().addAll(occurrences[i]);
-            begin += angle;
+            begin += angle; //gets the beginning angle for each
         }
-        occurrences[results.length-1] = arc(begin,360-angleTotal, pieColours[results.length-1]);
-        pane.getChildren().add(occurrences[results.length-1]);
+        occurrences[results.length-1] = arc(begin,360-angleTotal, pieColours[results.length-1]);    //for the last element in warnings
+        pane.getChildren().add(occurrences[results.length-1]);  //adds the last
     }
 
     private Arc arc(double begin, double angle, Color color) {  //arc method that just initializes everything

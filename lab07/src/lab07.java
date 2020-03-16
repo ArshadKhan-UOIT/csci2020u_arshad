@@ -61,7 +61,7 @@ public class lab07 extends Application {
         results[3] = t;
         lengend = new Rectangle[4];
         generatePieGraph(); //to generate a pie graph
-        generateLeneng();   //to generate the legend
+        generateLengend();   //to generate the legend
 
         //Do not forget to close the scanner
         scanner.close();
@@ -72,7 +72,7 @@ public class lab07 extends Application {
 
     }
 
-    private void generateLeneng() { //this generates the legend
+    private void generateLengend() { //this generates the legend
         int y=200, x=100;
         int recWidth = 50;
         int recLength = 25;

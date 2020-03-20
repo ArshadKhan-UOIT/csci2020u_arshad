@@ -24,6 +24,11 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import javafx.scene.control.*;
+<<<<<<< HEAD
+=======
+import javafx.scene.layout.Pane;
+
+>>>>>>> beta
 public class Q4 extends Application {
     final static String alphabet[] = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P",
             "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"}; /*Array to keep track of all
@@ -61,10 +66,20 @@ public class Q4 extends Application {
         xAxis.setLabel("Letters");
         yAxis.setLabel("Frequency");
         XYChart.Series series1 = new XYChart.Series(); //Empty set of data to eventually put in the chart
+<<<<<<< HEAD
         series1.setName("Frequency");
         t1.setOnKeyPressed(e-> { //Key press event
             if (e.getCode() == KeyCode.ENTER) //If the key is enter
             {
+=======
+//        series1.setName("Frequency");
+        t1.setOnKeyPressed(e-> { //Key press event
+
+            if (e.getCode() == KeyCode.ENTER) //If the key is enter
+            {
+                chart.getData().clear();
+//                chart.getData().clear();
+>>>>>>> beta
                 File inputFile = new File(t1.getText());
                 if (!inputFile.exists()) {
                     System.out.println("File not found. Is the path correct?");
@@ -80,15 +95,32 @@ public class Q4 extends Application {
                     }
                     countLetters(t1.getText()); //Function call to count the letters
                     for (int x=0; x<alphabet.length; x++) {
+<<<<<<< HEAD
                         series1.getData().add(new XYChart.Data<>(alphabet[x], freqs[x]));
                         //Adds data to the series for each letter in the alphabet.
                     }
+=======
+                        XYChart.Data<String, Number> data1 = new XYChart.Data(alphabet[x], freqs[x]);
+                        series1.getData().add(data1);
+//                        series1.getData().add(new XYChart.Data<>(alphabet[x], freqs[x]));
+//                        //Adds data to the series for each letter in the alphabet.
+                    }
+
+>>>>>>> beta
                     chart.getData().addAll(series1); //Adds the data to the series.
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
+<<<<<<< HEAD
             }
         });
+=======
+
+            }
+
+        });
+        chart.setAnimated(false);
+>>>>>>> beta
         borderpane.setCenter(chart); //Sets the chart to the middle of the gui
         borderpane.setBottom(t1); //Sets the text to the bottom of the gui
         Scene scene  = new Scene(borderpane, 600, 400); //Sets minimum dimensions for the window
